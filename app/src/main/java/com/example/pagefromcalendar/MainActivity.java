@@ -3,11 +3,16 @@ package com.example.pagefromcalendar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
 import android.animation.ArgbEvaluator;
 import android.os.Bundle;
 import android.view.Display;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,10 +24,17 @@ public class MainActivity extends AppCompatActivity {
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Calendar calendar = Calendar.getInstance();
+        String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+
+        TextView textViewDate = findViewById(R.id.btnOrder);
+        textViewDate.setText(currentDate);
 
         models = new ArrayList<>();
         models.add(new Model(R.drawable.sticker, "1573", "Podpisano konfederację warszawską – akt polityczny gwarantujący tolerancję religijną."));
