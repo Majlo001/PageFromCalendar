@@ -14,11 +14,11 @@ import java.util.List;
 
 public class Adapter extends PagerAdapter{
 
-    private List<PageModel> models;
+    private List<Model> models;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public Adapter(List<PageModel> models, Context context){
+    public Adapter(List<Model> models, Context context){
         this.models = models;
         this.context = context;
     }

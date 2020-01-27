@@ -3,6 +3,7 @@ package com.example.pagefromcalendar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.animation.ArgbEvaluator;
 import android.os.Bundle;
 import android.view.Display;
 
@@ -13,7 +14,9 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     Adapter adapter;
-    List<PageModel> models;
+    List<Model> models;
+    Integer[] colors = null;
+    ArgbEvaluator argbEvaluator = new ArgbEvaluator();
 
 
     @Override
@@ -22,12 +25,51 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         models = new ArrayList<>();
-        models.add(new PageModel(R.drawable.ic_launcher_background, "1999", "Ktoś coś itp itd"));
-        models.add(new PageModel(R.drawable.ic_launcher_background, "1999", "Ktoś coś itp itd"));
-        models.add(new PageModel(R.drawable.ic_launcher_background, "1999", "Ktoś coś itp itd"));
+        models.add(new Model(R.drawable.brochure, "1999", "Ktoś coś itp itd"));
+        models.add(new Model(R.drawable.sticker, "1999", "Ktoś coś itp itd"));
+        models.add(new Model(R.drawable.poster, "1999", "Ktoś coś itp itd"));
+        models.add(new Model(R.drawable.namecard, "1999", "Ktoś coś itp itd"));
 
         adapter = new Adapter(models, this);
 
+        viewPager = findViewById(R.id.viewPager);
+        viewPager.setAdapter(adapter);
+        viewPager.setPadding(130,0,130,0);
 
+        Integer[] colors_temp = {
+                getResources().getColor(R.color.color1),
+                getResources().getColor(R.color.color2),
+                getResources().getColor(R.color.color3),
+                getResources().getColor(R.color.color4)
+        };
+
+        colors = colors_temp;
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position < (adapter.getCount() - 1) && position < (colors.length - 1)){
+                    viewPager.setBackgroundColor(
+                            (Integer) argbEvaluator.evaluate(
+                                    positionOffset,
+                                    colors[position],
+                                    colors[position + 1]
+                            )
+                    );
+                }else {
+                    viewPager.setBackgroundColor(colors[colors.length - 1]);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }
