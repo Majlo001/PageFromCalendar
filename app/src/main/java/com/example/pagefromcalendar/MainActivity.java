@@ -25,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         models = new ArrayList<>();
-        models.add(new Model(R.drawable.brochure, "1999", "Ktoś coś itp itd"));
+        models.add(new Model(R.drawable.sticker, "1573", "Podpisano konfederację warszawską – akt polityczny gwarantujący tolerancję religijną."));
+        models.add(new Model(R.drawable.sticker, "1576", "Szlachta na zjeździe w Jędrzejowie uznała elekcję Stefana Batorego na króla Polski."));
+        models.add(new Model(R.drawable.sticker, "1611", "Urodził się Jan Heweliusz, polski astronom i matematyk (zm. 1687)"));
         models.add(new Model(R.drawable.sticker, "1999", "Ktoś coś itp itd"));
-        models.add(new Model(R.drawable.poster, "1999", "Ktoś coś itp itd"));
-        models.add(new Model(R.drawable.namecard, "1999", "Ktoś coś itp itd"));
 
         adapter = new Adapter(models, this);
 
